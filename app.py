@@ -353,4 +353,7 @@ with gr.Blocks(theme=theme, css=custom_css) as interface:
                 """
             )
 
-interface.launch(share=False)
+# Get the port from the Render environment variable
+port = int(os.getenv("PORT", 8080))  # Default to 8080 if PORT is not set
+
+interface.launch(server_name="0.0.0.0", server_port=port)
