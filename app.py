@@ -258,7 +258,7 @@ with gr.Blocks(theme=theme, css=custom_css) as interface:
         with gr.Tab("Ask a Statistics Question"):
             gr.Markdown("### Ask an Introductory Statistics Question", elem_id="instruction-markdown")
             gr.Markdown(
-                "Enter your question below. The assistant will produce a fully formatted LaTeX PDF as the answer."
+                "Enter your question below. The assistant will produce a fully LaTeX-formatted PDF as the answer."
             )
             with gr.Row():
                 with gr.Column():
