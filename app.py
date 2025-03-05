@@ -25,8 +25,14 @@ from PIL import Image
 from langchain.chains import RetrievalQA
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
-from langchain.vectorstores import FAISS
-from langchain.embeddings.openai import OpenAIEmbeddings
+
+from langchain_community.vectorstores import FAISS
+from langchain_openai import OpenAIEmbeddings
+
+
+#from langchain.vectorstores import FAISS
+#from langchain.embeddings.openai import OpenAIEmbeddings
+
 from pylatexenc.latex2text import LatexNodes2Text
 from langchain.docstore.document import Document
 
