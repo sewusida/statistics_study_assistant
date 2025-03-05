@@ -1,11 +1,11 @@
 # =============================
 # 0. INSTALL DEPENDENCIES
 # =============================
-!pip install openai pillow gradio faiss-cpu langchain langchain-openai langchain-community pylatexenc requests
+#!pip install openai pillow gradio faiss-cpu langchain langchain-openai langchain-community pylatexenc requests
 
 # Install LaTeX tools for PDF compilation
-!apt-get update
-!apt-get install -y texlive-latex-extra texlive-xetex latexmk
+#!apt-get update
+#!apt-get install -y texlive-latex-extra texlive-xetex latexmk
 
 # =============================
 # 1. MOUNT GOOGLE DRIVE (OPTIONAL)
