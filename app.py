@@ -15,6 +15,10 @@ from langchain_openai import OpenAIEmbeddings
 from pylatexenc.latex2text import LatexNodes2Text
 from langchain.docstore.document import Document
 
+# Ensure LaTeX dependencies are installed
+os.system("apt-get update && apt-get install -y texlive-latex-extra texlive-xetex latexmk")
+
+
 # =============================
 # 3. EXTRACT LATEX CONTENT FROM DOCUMENTS
 # =============================
