@@ -1,19 +1,4 @@
 # =============================
-# 0. INSTALL DEPENDENCIES
-# =============================
-#!pip install openai pillow gradio faiss-cpu langchain langchain-openai langchain-community pylatexenc requests
-
-# Install LaTeX tools for PDF compilation
-#!apt-get update
-#!apt-get install -y texlive-latex-extra texlive-xetex latexmk
-
-# =============================
-# 1. MOUNT GOOGLE DRIVE (OPTIONAL)
-# =============================
-#from google.colab import drive
-#drive.mount('/content/drive')
-
-# =============================
 # 2. IMPORT LIBRARIES
 # =============================
 import os
@@ -25,14 +10,8 @@ from PIL import Image
 from langchain.chains import RetrievalQA
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
-
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
-
-
-#from langchain.vectorstores import FAISS
-#from langchain.embeddings.openai import OpenAIEmbeddings
-
 from pylatexenc.latex2text import LatexNodes2Text
 from langchain.docstore.document import Document
 
@@ -110,10 +89,55 @@ qa_chain = RetrievalQA.from_chain_type(
 # =============================
 
 def pdf_to_base64(pdf_path):
+    """
+    Convert a PDF file to a base64-encoded string.
+    """
     with open(pdf_path, "rb") as f:
         pdf_data = f.read()
     return base64.b64encode(pdf_data).decode('utf-8')
 
+def compile_latex_to_pdf(latex_code):
+    """
+    Compile LaTeX code to PDF and return the base64 encoded PDF for inline display.
+    """
+    try:
+        # Write the LaTeX code to a file
+        with open("output.tex", "w") as f:
+            f.write(latex_code)
+
+        # Compile the LaTeX file into a PDF
+        compilation = os.system("latexmk -pdf output.tex")
+        if compilation != 0:
+            return "Error compiling LaTeX document. Please check the LaTeX syntax.", ""
+
+        # Convert PDF to base64
+        pdf_base64 = pdf_to_base64("output.pdf")
+
+        # Create an HTML iframe tag for the PDF
+        html_pdf = f"""
+<script>
+function base64ToBlobUrl(base64, contentType) {{
+    contentType = contentType || 'application/pdf';
+    var byteCharacters = atob(base64);
+    var byteNumbers = new Array(byteCharacters.length);
+    for (var i = 0; i < byteCharacters.length; i++) {{
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }}
+    var byteArray = new Uint8Array(byteNumbers);
+    var blob = new Blob([byteArray], {{type: contentType}});
+    return URL.createObjectURL(blob);
+}}
+window.onload = function() {{
+    var base64Data = "{pdf_base64}";
+    var blobUrl = base64ToBlobUrl(base64Data);
+    document.getElementById("pdfFrame").src = blobUrl;
+}};
+</script>
+<iframe id="pdfFrame" width="100%" height="600px" style="border:none;"></iframe>
+"""
+        return html_pdf, ""
+    except Exception as e:
+        return f"An error occurred: {str(e)}", ""
 
 def handle_rag_query(user_query):
     """
@@ -126,24 +150,10 @@ def handle_rag_query(user_query):
         response = qa_chain.invoke({"query": user_query})
         answer_latex = response["result"]  # This is the full LaTeX document
 
-        # Write the LaTeX code to a file
-        with open("output.tex", "w") as f:
-            f.write(answer_latex)
+        # Compile LaTeX to PDF and get the HTML iframe tag
+        pdf_html, _ = compile_latex_to_pdf(answer_latex)
 
-        # Compile the LaTeX file into a PDF
-        compilation = os.system("latexmk -pdf output.tex")
-        if compilation != 0:
-            return "Error compiling LaTeX document. Please check the LaTeX syntax.", ""
-
-        # Convert PDF to base64
-        pdf_base64 = pdf_to_base64("output.pdf")
-        html_pdf = f"""
-        <embed src="data:application/pdf;base64,{pdf_base64}"
-               width="100%" height="600px" type="application/pdf" />
-        """
-
-        # Return only the PDF HTML (no source documents)
-        return html_pdf, ""
+        return pdf_html, ""
     except Exception as e:
         return f"An error occurred: {str(e)}", ""
 
@@ -255,49 +265,6 @@ custom_css = """
     text-align: center;
 }
 """
-
-def compile_latex_to_pdf(latex_code):
-    """
-    Compile LaTeX code to PDF and return the base64 encoded PDF.
-    """
-    try:
-        # Write the LaTeX code to a file
-        with open("output.tex", "w") as f:
-            f.write(latex_code)
-
-        # Compile the LaTeX file into a PDF
-        compilation = os.system("latexmk -pdf output.tex")
-        if compilation != 0:
-            return "Error compiling LaTeX document. Please check the LaTeX syntax.", ""
-
-        # Convert PDF to base64
-        pdf_base64 = pdf_to_base64("output.pdf")
-        html_pdf = f"""
-<script>
-function base64ToBlobUrl(base64, contentType) {{
-    contentType = contentType || 'application/pdf';
-    var byteCharacters = atob(base64);
-    var byteNumbers = new Array(byteCharacters.length);
-    for (var i = 0; i < byteCharacters.length; i++) {{
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }}
-    var byteArray = new Uint8Array(byteNumbers);
-    var blob = new Blob([byteArray], {{type: contentType}});
-    return URL.createObjectURL(blob);
-}}
-window.onload = function() {{
-    var base64Data = "{pdf_base64}";
-    var blobUrl = base64ToBlobUrl(base64Data);
-    document.getElementById("pdfFrame").src = blobUrl;
-}};
-</script>
-<iframe id="pdfFrame" width="100%" height="600px" style="border:none;"></iframe>
-"""
-
-
-        return html_pdf, ""
-    except Exception as e:
-        return f"An error occurred: {str(e)}", ""
 
 with gr.Blocks(theme=theme, css=custom_css) as interface:
     gr.Markdown("## Statistics Study Assistant", elem_id="title-markdown")
