@@ -1,0 +1,200 @@
+\chapter{Sampling Distributions}
+
+\textbf{Parameter:} a number that describes the entire \textbf{population}. A parameter is not a random variable.
+
+\vspace{0.2cm}
+
+\noindent \textbf{Statistic:} a number that can be computed from the \textbf{sample} data without making use of any unknown parameters.
+
+\vspace{0.2cm}
+
+\noindent A statistic is used to estimate a parameter.
+
+\vspace{0.2cm}
+
+\noindent A statistic is the variable of a sampling distribution. E.g. The sample mean, $\bar{X}$, is a random variable.
+
+\subsection*{Example 1}
+
+\textbf{i.} In an attempt to find out how road traffic on Mondays affect travel time of UNM students, a survey conducted by the Maths Department found out that students spend 12.5 minutes on average when commuting to school on Mondays. Is the 12 minutes a statistic or a parameter?
+
+\noindent \textcolor{red}{Statistic} \\
+\textcolor{red}{It is a statistic because it is computed from a sample of UNM students.}
+
+\vspace{0.2cm}
+
+\textbf{ii.} The median hourly salary in Albuquerque was \$12 for a sample of 1000 workers. Is the number \$12 a statistic or a parameter?
+
+\noindent \textcolor{red}{Statistic} \\
+\textcolor{red}{It is a statistic because it is computed from a sample of workers in Albuquerque.}
+
+\vspace{0.2cm}
+
+\textbf{iii.} A instructor wants to find out how much time his students used to complete their first exam in his Math 1350 class. So he calculates the average exam 1 time of his students and it is 48 minutes. Is the number 48 minutes a statistic or a parameter?
+
+\noindent \textcolor{red}{Parameter} \\
+\textcolor{red}{It is a parameter because it is computed from all the students in the instructor's class.}
+
+\vspace{0.2cm}
+
+\textbf{iv.} What can teachers do to alleviate statistics anxiety in their students? To explore this question, statistics anxiety for students in two classes was compared. In one class, the instructor lectured in a formal manner, including dressing formally. In the other, the instructor was less formal, dressed informally, was more personal, used humor, and called on students by their first names. Anxiety was measured using a questionnaire. Higher scores indicate a greater level of anxiety. The mean anxiety score for students in the formal lecture class was \textbf{25.40}; in the informal class the mean was \textbf{20.41}. For each of the boldface numbers, indicate whether it is a parameter or a statistic.
+
+\noindent \textcolor{red}{Both 25.40 and 20.41 are statistics.} \\
+Both 25.40 and 20.41 are parameters. \\
+25.40 is statistics and 20.41 is parameters. \\
+25.40 is parameters and 20.41 is statistics.
+
+
+\section{Law of Large Numbers}
+Draw observations at random from any population with finite mean $\mu$. As the number of observations drawn \textbf{increases}, the mean $\bar{x}$ of the observed values tends to get \textbf{closer and closer} to the mean $\mu$ of the population.
+
+\vspace{0.2cm}
+
+\textbf{In simple terms:} as the sample size $n$ increases, the sample mean $\bar{x}$ gets \textbf{closer and closer} to the population mean $\mu$.
+
+\section*{Population Distribution vs Sampling Distribution}
+
+\textbf{Population distribution} of a variable is the distribution of values of the variable among \textbf{all the individuals} in the \textbf{population}. 
+
+\vspace{0.2cm}
+
+\noindent E.g. Consider the distribution of Math scores of all students who took the SAT exam in 2018. This is an example of a population distribution because it is the distribution of the Math scores for all students who took the SAT exam in 2018.
+
+\vspace{0.2cm}
+
+\noindent \textbf{Sample distribution} of a variable is the distribution of values of the variable among \textbf{all the individuals} in the \textbf{sample}.
+
+\vspace{0.2cm}
+
+\noindent \textbf{Sampling distribution} of a statistic is the distribution of values taken by the \textbf{statistic} in all possible samples of the same size from the same population.
+
+\section{The sampling distribution of the sample mean, $\bar{x}$}
+Suppose that $\bar{x}$ is the mean of an SRS of size $n$ drawn from a large population with mean $\mu$ and standard deviation $\sigma$. Then the sampling distribution of $\bar{x}$ has mean $\mu$ and \textbf{standard deviation} $\frac{\sigma}{\sqrt{n}}$.
+
+\subsection*{Facts about Mean and Standard Deviation of a Sample Mean}
+
+\begin{enumerate}
+    \item The mean of $\bar{x}$ is equal to $\mu$. That is, the sample mean $\bar{x}$ is an unbiased estimator of the population mean $\mu$.
+    \item Averages are less variable than individual observations.
+    \item The results of large samples are less variable than the results of small samples.
+\end{enumerate}
+
+\subsection*{Example 2}
+
+The distribution of scores of all students taking an exam is approximately Normal with mean $\mu = 21$ and $\sigma = 5$. What is the standard deviation of the sampling distribution of $\bar{x}$ created from random samples of size 16?
+
+\subsection*{Solution}
+\[
+\frac{\sigma}{\sqrt{n}} = \frac{5}{\sqrt{16}} = 1.25
+\]
+
+\subsection*{Example 3}
+
+The ages of students of a certain school are normally distributed with a mean of 12 years and standard deviation of 4 years. What is the probability that a randomly chosen student is:
+
+\begin{enumerate}
+    \item Less than 10 years old?
+    \item More than 9 years old?
+    \item Between 8 and 14 years old?
+\end{enumerate}
+
+\subsection*{Solution}
+\textbf{i.}
+
+\[
+z = \frac{x - \mu}{\sigma}
+\]
+
+\[
+= \frac{10 - 12}{4} = -0.5
+\]
+
+\[
+P(X < 10) = P(z < -0.5) = 0.3085
+\]
+
+Therefore, the probability is \textbf{0.3085}.
+
+\textbf{ii.}
+
+\[
+z = \frac{x - \mu}{\sigma}
+\]
+
+\[
+= \frac{9 - 12}{4} = -0.75
+\]
+
+\[
+P(X > 9) = 1 - P(z < -0.75)
+\]
+
+\[
+= 1 - 0.2266 = 0.7734
+\]
+
+Therefore, the probability is \textbf{0.7734}.
+
+\textbf{iii.}
+
+\[
+P(8 < X < 14)
+\]
+
+\[
+z_1 = \frac{x - \mu}{\sigma}
+\]
+
+\[
+= \frac{8 - 12}{4} = -1
+\]
+
+\[
+P(z_1 < -1) = P(z < -1) = 0.1587
+\]
+\[
+z_2 = \frac{x - \mu}{\sigma}
+\]
+
+\[
+= \frac{14 - 12}{4} = 0.5
+\]
+
+\[
+P(z_2 < 0.5) = P(z < 0.5) = 0.6915
+\]
+
+Then subtract the smaller probability from the bigger one:
+
+\[
+P(8 < X < 14) = 0.6915 - 0.1587 = 0.5328
+\]
+
+\noindent Therefore, the probability is \textbf{0.5328}.
+
+\section{Central Limit Theorem}
+Draw an SRS of size $n$ from any population with mean $\mu$ and finite standard deviation $\sigma$. \textbf{The central limit theorem} says that when $n$ is large, the sampling distribution of the sample mean $\bar{x}$ is approximately Normal:
+\[
+\bar{x} \text{ is approximately } N\left(\mu, \frac{\sigma}{\sqrt{n}}\right)
+\]
+
+
+\subsection*{How large should n be?}
+Usually, when $n \geq 30$ we consider it large.
+
+\subsection*{What does the Central Limit Theorem do?}
+It allows us to use Normal probability calculations to answer questions about sample means from many observations even when the population distribution is not Normal.
+
+\section{Law of Large Numbers (LLN) versus Central Limit Theorem (CLT)}
+
+\noindent \textbf{LLN:} As the sample size increases, the sample mean $\bar{x}$ gets closer and closer to the population mean $\mu$.
+
+\vspace{0.2cm}
+
+\noindent \textbf{CLT:} As the sample size increases, the sample mean $\bar{x}$ gets approximately normally distributed. That is:
+
+\[
+\bar{x} \sim N\left(\mu, \frac{\sigma}{\sqrt{n}}\right)
+\]
+
+\noindent \textbf{Note:} The standard deviation of the sampling distribution of $\bar{x}$ (which is $\frac{\sigma}{\sqrt{n}}$) gets smaller as the sample size increases.

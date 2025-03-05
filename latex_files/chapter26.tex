@@ -1,0 +1,45 @@
+\chapter{Introduction to Sampling Distributions}
+
+In this chapter, we introduce the concept of \textit{sampling distributions}, which play a crucial role in statistical inference. A sampling distribution describes the probability distribution of a given statistic based on a random sample. Understanding these distributions is fundamental in estimating population parameters, constructing confidence intervals, and performing hypothesis tests.
+
+\section{Basic Definitions and Concepts}
+
+Suppose we have a population with a true mean $\mu$ and variance $\sigma^2$. When we draw a sample of size $n$ from this population, we can compute the sample mean:
+\[
+\overline{X} = \frac{1}{n}\sum_{i=1}^{n} X_i,
+\]
+where $X_1, X_2, \ldots, X_n$ are the individual sample observations.
+
+The \textbf{sampling distribution of the sample mean} is the probability distribution of $\overline{X}$ over all possible samples of size $n$ taken from the population. If the population is large and each sample is drawn independently and identically distributed, we can analyze the properties of $\overline{X}$.
+
+\section{The Central Limit Theorem}
+
+One of the key results regarding sampling distributions is the \textit{Central Limit Theorem (CLT)}. It states that if we have a population with a finite mean $\mu$ and finite variance $\sigma^2$, then as the sample size $n$ becomes large, the distribution of the standardized sample mean,
+\[
+Z = \frac{\overline{X} - \mu}{\sigma/\sqrt{n}},
+\]
+converges in distribution to a standard normal distribution $N(0,1)$.
+
+In other words, even if the original population is not normally distributed, the sampling distribution of the sample mean $\overline{X}$ will approximate a normal distribution for sufficiently large $n$.
+
+\section{Implications for Confidence Intervals}
+
+Because of the CLT, we can construct approximate confidence intervals for the population mean when the sample size is large. A $(1-\alpha)\%$ confidence interval for $\mu$ can often be written as:
+\[
+\overline{X} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}},
+\]
+where $z_{\alpha/2}$ is the critical value from the standard normal distribution for the desired confidence level.
+
+\section{Examples}
+
+\subsection{Normal Population Example}
+
+If the population itself is normally distributed, then the sampling distribution of the sample mean $\overline{X}$ is exactly normal for any sample size $n$. In this special case, the sample mean is always normally distributed with mean $\mu$ and variance $\frac{\sigma^2}{n}$.
+
+\subsection{Non-Normal Population Example}
+
+If the population is not normal, say it has a skewed distribution, then the sampling distribution of $\overline{X}$ might not be normal for small $n$. However, as $n$ grows, the CLT ensures that the sampling distribution will become more and more bell-shaped. For sufficiently large $n$, the normal approximation becomes reasonably accurate.
+
+\section{Summary}
+
+In this chapter, we introduced the concept of sampling distributions, focusing primarily on the distribution of the sample mean. We discussed how the Central Limit Theorem ensures that the sample mean tends toward a normal distribution as $n$ increases, regardless of the underlying population distribution. This foundational concept will help us in later chapters, where we explore estimation techniques, confidence intervals, and hypothesis testing in greater detail.
