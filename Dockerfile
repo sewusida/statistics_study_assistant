@@ -25,3 +25,6 @@ EXPOSE 7860
 
 # Run the app
 CMD ["python", "app.py"]
+
+# Verify LaTeX tools are installed
+RUN latexmk --version
