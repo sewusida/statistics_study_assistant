@@ -273,8 +273,27 @@ def compile_latex_to_pdf(latex_code):
         # Convert PDF to base64
         pdf_base64 = pdf_to_base64("output.pdf")
         html_pdf = f"""
-<iframe src="data:application/pdf;base64,{pdf_base64}" width="100%" height="600px" style="border:none;"></iframe>
+<script>
+function base64ToBlobUrl(base64, contentType) {{
+    contentType = contentType || 'application/pdf';
+    var byteCharacters = atob(base64);
+    var byteNumbers = new Array(byteCharacters.length);
+    for (var i = 0; i < byteCharacters.length; i++) {{
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }}
+    var byteArray = new Uint8Array(byteNumbers);
+    var blob = new Blob([byteArray], {{type: contentType}});
+    return URL.createObjectURL(blob);
+}}
+window.onload = function() {{
+    var base64Data = "{pdf_base64}";
+    var blobUrl = base64ToBlobUrl(base64Data);
+    document.getElementById("pdfFrame").src = blobUrl;
+}};
+</script>
+<iframe id="pdfFrame" width="100%" height="600px" style="border:none;"></iframe>
 """
+
 
         return html_pdf, ""
     except Exception as e:
