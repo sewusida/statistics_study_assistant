@@ -256,6 +256,31 @@ custom_css = """
 }
 """
 
+def compile_latex_to_pdf(latex_code):
+    """
+    Compile LaTeX code to PDF and return the base64 encoded PDF.
+    """
+    try:
+        # Write the LaTeX code to a file
+        with open("output.tex", "w") as f:
+            f.write(latex_code)
+
+        # Compile the LaTeX file into a PDF
+        compilation = os.system("latexmk -pdf output.tex")
+        if compilation != 0:
+            return "Error compiling LaTeX document. Please check the LaTeX syntax.", ""
+
+        # Convert PDF to base64
+        pdf_base64 = pdf_to_base64("output.pdf")
+        #html_pdf = f"""
+        #<embed src="data:application/pdf;base64,{pdf_base64}"
+               #width="100%" height="600px" type="application/pdf" />
+        #"""
+
+        return html_pdf, ""
+    except Exception as e:
+        return f"An error occurred: {str(e)}", ""
+
 with gr.Blocks(theme=theme, css=custom_css) as interface:
     gr.Markdown("## Statistics Study Assistant", elem_id="title-markdown")
 
