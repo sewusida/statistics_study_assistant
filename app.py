@@ -272,10 +272,10 @@ def compile_latex_to_pdf(latex_code):
 
         # Convert PDF to base64
         pdf_base64 = pdf_to_base64("output.pdf")
-        #html_pdf = f"""
-        #<embed src="data:application/pdf;base64,{pdf_base64}"
-               #width="100%" height="600px" type="application/pdf" />
-        #"""
+        html_pdf = f"""
+        <embed src="data:application/pdf;base64,{pdf_base64}"
+               width="100%" height="600px" type="application/pdf" />
+        """
 
         return html_pdf, ""
     except Exception as e:
