@@ -368,4 +368,4 @@ with gr.Blocks(theme=theme, css=custom_css) as interface:
                 """
             )
 
-interface.launch()
+interface.launch(share=False)
